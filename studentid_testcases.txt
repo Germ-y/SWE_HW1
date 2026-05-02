@@ -3,8 +3,8 @@
 ./bison -d -v ../examples/c/rpcalc/rpcalc.y
 ./bison ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y
-./bison --warnings=bad
-./bison --xml ../examples/c/calc/calc.y
+printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y
+./bison --warnings=yacc dep.y
 ./bison -Dlr.type=lalr c.y
 ./bison --report=itemsets,lookaheads,solved c.y
 ./bison -f syntax-only -M../..=. c.y
