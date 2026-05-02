@@ -1,30 +1,30 @@
 ./bison --help
-./bison ../tests/named-refs.at
-./bison ../tests/diagnostics.at
-printf '%s\n' '%union {int i;}' '%token <i> A' '%type <i> s' '%%' 's:A {$$=$1;}|s A {$$=$1;};' '%%' >s.y; ./bison -f syntax-only s.y
-printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison -f syntax-only c.y
-printf '%s\n' '%token A B' '%%' 's:s s|A|B;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
-printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y; ./bison -f syntax-only g.y
-printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y; ./bison -f syntax-only --warnings=all,error=deprecated dep.y
+./bison --version
+./bison --trace
+./bison --warnings=bad
+./bison --report=bad
+./bison --color=bad
+./bison --feature=bad
+./bison --language=bad
+./bison --skeleton=missing
+./bison --print-datadir
+./bison --print-localedir
+./bison ../tests/input.at
 ./bison --color=always ../tests/input.at
-printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
-printf '%s\n' '%{' 'int x;' >u.y; ./bison u.y
-./bison ../tests/types.at
-sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
-./bison -Dlr.type=ielr c.y
-./bison -Dlr.type=lalr c.y
-./bison ../tests/conflicts.at
-./bison --report=all c.y
-./bison -Wcounterexamples if.y
-./bison -L java -d -v s.y
+./bison ../tests/diagnostics.at
 ./bison ../tests/regression.at
-./bison --skeleton=missing s.y
-./bison -f syntax-only -M../..=. c.y
+./bison ../tests/named-refs.at
+./bison ../tests/conflicts.at
+./bison ../tests/types.at
 ./bison ../tests/java.at
-./bison --report=all g.y
-./bison --html=s.html s.y
-./bison --graph=g.dot g.y
-./bison --xml=g.xml g.y
-./bison --warnings=yacc dep.y
-./bison --feature=bad s.y
+./bison ../tests/glr-regression.at
+./bison ../tests/report.at
+./bison ../tests/counterexample.at
+./bison ../tests/reduce.at
+./bison ../tests/actions.at
+./bison ../tests/output.at
+./bison ../tests/calc.at
+./bison ../examples/c/calc/calc.y
+./bison --report=all ../examples/c/glr/c++-types.y
+./bison -d -v ../examples/c/rpcalc/rpcalc.y
+./bison ../src/parse-gram.y
