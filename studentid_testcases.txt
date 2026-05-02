@@ -1,12 +1,12 @@
-./bison --debug
+./bison --feature=bad
 ./bison --report=all ../examples/c/glr/c++-types.y
 ./bison -d -v ../examples/c/rpcalc/rpcalc.y
 ./bison ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y
 ./bison --warnings=bad
-./bison -Dlr.type=ielr c.y
+./bison --xml ../examples/c/calc/calc.y
 ./bison -Dlr.type=lalr c.y
-./bison --report=all c.y
+./bison --report=itemsets,lookaheads,solved c.y
 ./bison -f syntax-only -M../..=. c.y
 printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y
 ./bison --report=bad
@@ -27,4 +27,4 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 sed -n 320,382p ../tests/named-refs.at >nr.y
 ./bison nr.y
 ./bison --version
-./bison --trace
+./bison --graph ../examples/c/calc/calc.y
