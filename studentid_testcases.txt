@@ -1,6 +1,6 @@
 ./bison --feature=bad
 ./bison --report=all ../examples/c/glr/c++-types.y
-./bison -d -v ../examples/c/rpcalc/rpcalc.y
+./bison --html ../examples/java/calc/Calc.y
 ./bison ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y
 printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y
