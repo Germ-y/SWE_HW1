@@ -19,7 +19,7 @@ printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | .
 printf '%s\n' '%debug' '%locations' '%define api.pure full' '%parse-param {int *r}' '%token A' '%%' 's:|s A {if(r)*r=0;};' '%%' | tee a.y | ./bison -L java -d -v -
 printf '%s\n' '%%' 's: + + ;' '%%' | tee syn.y | ./bison --trace -
 ./bison --trace syn.y
-./bison ../tests/synclines.at
+./bison --report=all ../examples/java/calc/Calc.y
 ./bison --color=always ../tests/input.at
 ./bison ../tests/diagnostics.at
 ./bison ../tests/regression.at
