@@ -1,24 +1,24 @@
 BISON_PKGDATADIR=../data ./bison --help
 BISON_PKGDATADIR=../data ./bison --version
-BISON_PKGDATADIR=../data ./bison --verbose
-BISON_PKGDATADIR=../data ./bison --debug
+BISON_PKGDATADIR=../data ./bison ../../unterminated.y
+BISON_PKGDATADIR=../data ./bison -Dlr.type=canonical-lr ../../advanced.y
 BISON_PKGDATADIR=../data ./bison --trace
 BISON_PKGDATADIR=../data ./bison -y ../../simple.y
-BISON_PKGDATADIR=../data ./bison --report=all ../../simple.y
-BISON_PKGDATADIR=../data ./bison -Wall ../../simple.y
+BISON_PKGDATADIR=../data ./bison -M/home/germy/2026s_hw1=. ../../calc.y
+BISON_PKGDATADIR=../data ./bison --html=report.html ../../calc.y
 BISON_PKGDATADIR=../data ./bison --debug ../../calc.y
 BISON_PKGDATADIR=../data ./bison --defines ../../calc.y
-BISON_PKGDATADIR=../data ./bison --report=itemsets,lookaheads,solved ../../calc.y
+BISON_PKGDATADIR=../data ./bison -Dparse.lac=none ../../params.y
 BISON_PKGDATADIR=../data ./bison --locations ../../locations.y
 BISON_PKGDATADIR=../data ./bison -L c++ ../../calc.y
 BISON_PKGDATADIR=../data ./bison -L java ../../simple.y
 BISON_PKGDATADIR=../data ./bison --language=bad ../../simple.y
 BISON_PKGDATADIR=../data ./bison --skeleton=missing ../../simple.y
-BISON_PKGDATADIR=../data ./bison -Dapi.prefix={calc} ../../calc.y
-BISON_PKGDATADIR=../data ./bison -Fapi.prefix={forced} ../../calc.y
+BISON_PKGDATADIR=../data ./bison -o calc_parser.c ../../calc.y
+BISON_PKGDATADIR=../data ./bison -L c++ --defines --report=all ../../advanced.y
 BISON_PKGDATADIR=../data ./bison -Wcounterexamples ../../conflict.y
 BISON_PKGDATADIR=../data ./bison --report-file=conflict.report --report=all ../../conflict.y
-BISON_PKGDATADIR=../data ./bison ../../glr.y
+BISON_PKGDATADIR=../data ./bison -Dlr.type=ielr ../../advanced.y
 BISON_PKGDATADIR=../data ./bison --graph=graph.dot ../../glr.y
 BISON_PKGDATADIR=../data ./bison --xml=report.xml ../../calc.y
 BISON_PKGDATADIR=../data ./bison --feature=all ../../syntax_error.y
