@@ -1,10 +1,10 @@
 ./bison --help
 ./bison --version
 ./bison --trace
-printf '%s\n' '%token A' '%%' 's:A;' '%%' >s.y; ./bison -f syntax-only s.y
-printf '%s\n' '%token NUM ID' '%left + -' '%left * /' '%%' 'e:NUM|ID|e+e|e*e|(e);' '%%' >c.y; ./bison -f syntax-only c.y
-printf '%s\n' '%token IF THEN ELSE ID' '%%' 's:IF e THEN s|IF e THEN s ELSE s|ID;e:ID;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
-printf '%s\n' '%glr-parser' '%token A B' '%%' 's:x|y;x:A|A B;y:A|A B;' '%%' >g.y; ./bison -f syntax-only g.y
+printf '%s\n' '%union {int i;}' '%token <i> A' '%type <i> s' '%%' 's:A {$$=$1;}|s A {$$=$1;};' '%%' >s.y; ./bison -f syntax-only s.y
+printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison -f syntax-only c.y
+printf '%s\n' '%token A B' '%%' 's:s s|A|B;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
+printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y; ./bison -f syntax-only g.y
 printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y; ./bison -f syntax-only --warnings=all,error=deprecated dep.y
 printf '%s\n' '%token A B' '%left +' '%%' 's:|m B;m:A { $$=1; } B;' '%%' >w.y; ./bison -f syntax-only --warnings=empty-rule,midrule-values,precedence w.y
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
