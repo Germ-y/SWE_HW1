@@ -10,7 +10,7 @@ printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%'
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
 printf '%s\n' '%{' 'int x;' >u.y; ./bison u.y
 ./bison ../tests/types.at
-./bison ../tests/glr-regression.at
+sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
 ./bison -Dlr.type=ielr c.y
 ./bison -Dlr.type=lalr c.y
