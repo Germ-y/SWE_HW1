@@ -1,30 +1,30 @@
-BISON_PKGDATADIR=../data ./bison --help
-BISON_PKGDATADIR=../data ./bison --version
-BISON_PKGDATADIR=../data ./bison ../../unterminated.y
-BISON_PKGDATADIR=../data ./bison -Dlr.type=canonical-lr ../../advanced.y
-BISON_PKGDATADIR=../data ./bison --trace
-BISON_PKGDATADIR=../data ./bison -y ../../simple.y
-BISON_PKGDATADIR=../data ./bison -M/home/germy/2026s_hw1=. ../../calc.y
-BISON_PKGDATADIR=../data ./bison --html=report.html ../../calc.y
-BISON_PKGDATADIR=../data ./bison --debug ../../calc.y
-BISON_PKGDATADIR=../data ./bison --defines ../../calc.y
-BISON_PKGDATADIR=../data ./bison -Dparse.lac=none ../../params.y
-BISON_PKGDATADIR=../data ./bison --locations ../../locations.y
-BISON_PKGDATADIR=../data ./bison -L c++ ../../calc.y
-BISON_PKGDATADIR=../data ./bison -L java ../../simple.y
-BISON_PKGDATADIR=../data ./bison --language=bad ../../simple.y
-BISON_PKGDATADIR=../data ./bison --skeleton=missing ../../simple.y
-BISON_PKGDATADIR=../data ./bison -o calc_parser.c ../../calc.y
-BISON_PKGDATADIR=../data ./bison -L c++ --defines --report=all ../../advanced.y
-BISON_PKGDATADIR=../data ./bison -Wcounterexamples ../../conflict.y
-BISON_PKGDATADIR=../data ./bison --report-file=conflict.report --report=all ../../conflict.y
-BISON_PKGDATADIR=../data ./bison -Dlr.type=ielr ../../advanced.y
-BISON_PKGDATADIR=../data ./bison --graph=graph.dot ../../glr.y
-BISON_PKGDATADIR=../data ./bison --xml=report.xml ../../calc.y
-BISON_PKGDATADIR=../data ./bison --feature=all ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --feature=bad ../../simple.y
-BISON_PKGDATADIR=../data ./bison --warnings=all,error=deprecated ../../deprecated.y
-BISON_PKGDATADIR=../data ./bison --warnings=empty-rule,midrule-values,precedence,dangling-alias ../../warnings.y
-BISON_PKGDATADIR=../data ./bison --report=all --graph --xml ../../advanced.y
-BISON_PKGDATADIR=../data ./bison --warnings=everything ../../params.y
-BISON_PKGDATADIR=../data ./bison --warnings=error=other ../../duplicate.y
+./bison --help
+./bison --version
+./bison --trace
+printf '%s\n' '%token A' '%%' 's:A;' '%%' >s.y; ./bison -f syntax-only s.y
+printf '%s\n' '%token NUM ID' '%left + -' '%left * /' '%%' 'e:NUM|ID|e+e|e*e|(e);' '%%' >c.y; ./bison -f syntax-only c.y
+printf '%s\n' '%token IF THEN ELSE ID' '%%' 's:IF e THEN s|IF e THEN s ELSE s|ID;e:ID;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
+printf '%s\n' '%glr-parser' '%token A B' '%%' 's:x|y;x:A|A B;y:A|A B;' '%%' >g.y; ./bison -f syntax-only g.y
+printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y; ./bison -f syntax-only --warnings=all,error=deprecated dep.y
+printf '%s\n' '%token A B' '%left +' '%%' 's:|m B;m:A { $$=1; } B;' '%%' >w.y; ./bison -f syntax-only --warnings=empty-rule,midrule-values,precedence w.y
+printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
+printf '%s\n' '%{' 'int x;' >u.y; ./bison u.y
+printf '%s\n' '%totally_unknown_directive' '%%' 's:A;' '%%' >bad.y; ./bison bad.y
+printf '%s\n' '%%' 's: @ ;' '%%' >ch.y; ./bison ch.y
+printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
+./bison -f syntax-only --report=all c.y
+./bison -f syntax-only --report=itemsets,lookaheads,solved c.y
+./bison -f syntax-only --locations c.y
+./bison -f syntax-only -L c++ c.y
+./bison -f syntax-only -L java s.y
+./bison -f syntax-only -L d s.y
+./bison --language=bad s.y
+./bison --skeleton=missing s.y
+./bison -f syntax-only -Dapi.prefix={p} c.y
+./bison -f syntax-only -Fapi.prefix={q} c.y
+./bison -f syntax-only -p yy c.y
+./bison -f syntax-only -k c.y
+./bison -f syntax-only -l c.y
+./bison -f syntax-only --warnings=everything dep.y
+./bison -f syntax-only --warnings=error=empty-rule,error=midrule-values w.y
+./bison --feature=bad s.y
