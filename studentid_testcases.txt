@@ -20,7 +20,7 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
 ./bison -f syntax-only -L d s.y
 ./bison --language=bad s.y
 ./bison --skeleton=missing s.y
-./bison -f syntax-only -Dapi.prefix={p} c.y
+./bison -f syntax-only -M/home/germy/2026s_hw1=. c.y
 ./bison -f syntax-only -Fapi.prefix={q} c.y
 ./bison -f syntax-only -p yy c.y
 ./bison -f syntax-only -k c.y
