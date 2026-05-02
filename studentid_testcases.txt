@@ -9,7 +9,7 @@ printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%'
 ./bison --report=itemsets,lookaheads,solved c.y
 ./bison -f syntax-only -M../..=. c.y
 printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' | tee g.y | ./bison --report=all -
-./bison --report=bad
+./bison --graph=x.dot ../examples/c++/glr/c++-types.yy
 ./bison --report=all g.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -Wcounterexamples -
 ./bison -Wcounterexamples r.y
