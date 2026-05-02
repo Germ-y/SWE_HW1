@@ -21,7 +21,7 @@ printf '%s\n' '%%' 's: + + ;' '%%' | tee syn.y | ./bison --trace -
 ./bison --trace syn.y
 ./bison --report=all ../examples/java/calc/Calc.y
 ./bison --color=always ../tests/input.at
-./bison ../tests/diagnostics.at
+./bison --report=all ../examples/c/reccalc/parse.y
 ./bison ../tests/regression.at
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at | tee nr.y | ./bison nr.y
