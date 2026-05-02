@@ -25,6 +25,6 @@ printf '%s\n' '%%' 's: + + ;' '%%' | tee syn.y | ./bison --trace -
 ./bison ../tests/regression.at
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at | tee nr.y | ./bison nr.y
-./bison nr.y
+./bison --xml=x.xml ../examples/c++/calc++/parser.yy
 ./bison --version
 ./bison -L java -d -v a.y
