@@ -1,27 +1,27 @@
 ./bison --help
-./bison --version
-./bison --warnings=bad s.y
+./bison ../tests/named-refs.at
+./bison ../tests/diagnostics.at
 printf '%s\n' '%union {int i;}' '%token <i> A' '%type <i> s' '%%' 's:A {$$=$1;}|s A {$$=$1;};' '%%' >s.y; ./bison -f syntax-only s.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison -f syntax-only c.y
 printf '%s\n' '%token A B' '%%' 's:s s|A|B;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
 printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y; ./bison -f syntax-only g.y
 printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y; ./bison -f syntax-only --warnings=all,error=deprecated dep.y
-./bison --color=always syn.y
+./bison --color=always ../tests/input.at
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
 printf '%s\n' '%{' 'int x;' >u.y; ./bison u.y
-printf '%s\n' '%totally_unknown_directive' '%%' 's:A;' '%%' >bad.y; ./bison bad.y
-printf '%s\n' '%%' 's: @ ;' '%%' >ch.y; ./bison ch.y
+./bison ../tests/types.at
+./bison ../tests/glr-regression.at
 printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
 ./bison -Dlr.type=ielr c.y
 ./bison -Dlr.type=lalr c.y
-./bison -f syntax-only --locations c.y
+./bison ../tests/conflicts.at
 ./bison --report=all c.y
 ./bison -Wcounterexamples if.y
 ./bison -L java -d -v s.y
-./bison --report=bad s.y
+./bison ../tests/regression.at
 ./bison --skeleton=missing s.y
 ./bison -f syntax-only -M/home/germy/2026s_hw1=. c.y
-./bison -f syntax-only -Fapi.prefix={q} c.y
+./bison ../tests/java.at
 ./bison --report=all g.y
 ./bison --html=s.html s.y
 ./bison --graph=g.dot g.y
