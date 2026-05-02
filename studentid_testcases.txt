@@ -1,60 +1,30 @@
 BISON_PKGDATADIR=../data ./bison --help
 BISON_PKGDATADIR=../data ./bison --version
-BISON_PKGDATADIR=../data ./bison --print-datadir
-BISON_PKGDATADIR=../data ./bison --print-localedir
 BISON_PKGDATADIR=../data ./bison --verbose
 BISON_PKGDATADIR=../data ./bison --debug
 BISON_PKGDATADIR=../data ./bison --trace
 BISON_PKGDATADIR=../data ./bison -y ../../simple.y
 BISON_PKGDATADIR=../data ./bison --report=all ../../simple.y
-BISON_PKGDATADIR=../data ./bison --report=none ../../simple.y
-BISON_PKGDATADIR=../data ./bison ../../simple.y
-BISON_PKGDATADIR=../data ./bison -d ../../simple.y
-BISON_PKGDATADIR=../data ./bison -v ../../simple.y
 BISON_PKGDATADIR=../data ./bison -Wall ../../simple.y
-BISON_PKGDATADIR=../data ./bison -Wnone ../../simple.y
 BISON_PKGDATADIR=../data ./bison --debug ../../calc.y
 BISON_PKGDATADIR=../data ./bison --defines ../../calc.y
-BISON_PKGDATADIR=../data ./bison --header=calc.h ../../calc.y
-BISON_PKGDATADIR=../data ./bison --report=state ../../calc.y
 BISON_PKGDATADIR=../data ./bison --report=itemsets,lookaheads,solved ../../calc.y
 BISON_PKGDATADIR=../data ./bison --locations ../../locations.y
-BISON_PKGDATADIR=../data ./bison -L c ../../calc.y
 BISON_PKGDATADIR=../data ./bison -L c++ ../../calc.y
 BISON_PKGDATADIR=../data ./bison -L java ../../simple.y
-BISON_PKGDATADIR=../data ./bison -L d ../../simple.y
 BISON_PKGDATADIR=../data ./bison --language=bad ../../simple.y
-BISON_PKGDATADIR=../data ./bison -S lalr1.cc ../../calc.y
 BISON_PKGDATADIR=../data ./bison --skeleton=missing ../../simple.y
 BISON_PKGDATADIR=../data ./bison -Dapi.prefix={calc} ../../calc.y
 BISON_PKGDATADIR=../data ./bison -Fapi.prefix={forced} ../../calc.y
-BISON_PKGDATADIR=../data ./bison -p yytest ../../calc.y
-BISON_PKGDATADIR=../data ./bison -k ../../calc.y
-BISON_PKGDATADIR=../data ./bison -l ../../calc.y
 BISON_PKGDATADIR=../data ./bison -Wcounterexamples ../../conflict.y
-BISON_PKGDATADIR=../data ./bison --report=counterexamples ../../conflict.y
 BISON_PKGDATADIR=../data ./bison --report-file=conflict.report --report=all ../../conflict.y
 BISON_PKGDATADIR=../data ./bison ../../glr.y
 BISON_PKGDATADIR=../data ./bison --graph=graph.dot ../../glr.y
 BISON_PKGDATADIR=../data ./bison --xml=report.xml ../../calc.y
-BISON_PKGDATADIR=../data ./bison --html=report.html ../../calc.y
-BISON_PKGDATADIR=../data ./bison -o calc_parser.c ../../calc.y
-BISON_PKGDATADIR=../data ./bison -b calc_prefix ../../calc.y
-BISON_PKGDATADIR=../data ./bison -M/home/germy/2026s_hw1=. ../../calc.y
-BISON_PKGDATADIR=../data ./bison --feature=caret,fixit,syntax-only ../../syntax_error.y
 BISON_PKGDATADIR=../data ./bison --feature=all ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --feature=none ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --color=always ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --color=never ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --style=../data/bison-default.css ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison ../../empty.y
-BISON_PKGDATADIR=../data ./bison ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison -d ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison --trace ../../syntax_error.y
-BISON_PKGDATADIR=../data ./bison ../../invalid_directive.y
-BISON_PKGDATADIR=../data ./bison ../../missing_semicolon.y
-BISON_PKGDATADIR=../data ./bison ../../bad_char.y
-BISON_PKGDATADIR=../data ./bison ../../unterminated.y
-BISON_PKGDATADIR=../data ./bison ../../duplicate.y
-BISON_PKGDATADIR=../data ./bison --warnings=all ../../duplicate.y
+BISON_PKGDATADIR=../data ./bison --feature=bad ../../simple.y
+BISON_PKGDATADIR=../data ./bison --warnings=all,error=deprecated ../../deprecated.y
+BISON_PKGDATADIR=../data ./bison --warnings=empty-rule,midrule-values,precedence,dangling-alias ../../warnings.y
+BISON_PKGDATADIR=../data ./bison --report=all --graph --xml ../../advanced.y
+BISON_PKGDATADIR=../data ./bison --warnings=everything ../../params.y
 BISON_PKGDATADIR=../data ./bison --warnings=error=other ../../duplicate.y
