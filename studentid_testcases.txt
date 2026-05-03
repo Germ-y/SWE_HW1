@@ -10,7 +10,7 @@ sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' | tee x.y | ./bison --trace -d -v --report=all --graph=x.dot --xml=x.xml /dev/stdin
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
 sed -n 2547,2549p ../tests/input.at >input.y; ./bison --report=all input.y
-printf '%s\n' '%locations' '%define parse.error detailed' '%token A B' '%%' 's:A B|error;' '%%' >e.y; ./bison --trace -d -v --report=all --graph=e.dot --xml=e.xml e.y
+printf '%s\n' '%token A B' '%%' 's:A;u:B;' '%%' >u.y; ./bison --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison --trace -d -v --report=all --graph=r.dot --xml=r.xml /dev/stdin
 ./bison -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
 sed -n 543,559p ../tests/actions.at >input.y; ./bison -d -v input.y
