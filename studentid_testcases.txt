@@ -13,7 +13,7 @@ printf '%s\n' '%glr-parser' '%locations' '%token <i> A B C' '%union {int i;}' '%
 ./bison --report=all ../examples/java/calc/Calc.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -d -v /dev/stdin
 ./bison -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
-printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | ./bison -L java -d -v /dev/stdin
+sed -n 543,559p ../tests/actions.at >input.y; ./bison -d -v input.y
 ./bison --graph ../examples/c++/glr/c++-types.yy
 ./bison -y ../examples/c++/variant-11.yy
 ./bison --report=all --xml=lg.xml c.y
