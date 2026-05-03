@@ -27,4 +27,4 @@ printf '%s\n' '%token A B' '%define lr.type ielr' '%expect 1' '%%' 's:e;' 'e:A|B
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 320,338p ../tests/reduce.at >ad.y; ./bison --xml=ad.xml ad.y
 ./bison -Dapi.pure old.y
-./bison --trace old.y
+./bison ../tests/testsuite
