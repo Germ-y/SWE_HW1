@@ -3,7 +3,7 @@
 ./bison --html ../examples/java/calc/Calc.y
 ./bison --xml ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -Wcounterexamples /dev/stdin
-printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y
+printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' | tee dep.y | ./bison -f syntax-only /dev/stdin
 ./bison --warnings=yacc dep.y
 ./bison -Dlr.type=lalr c.y
 ./bison --report=itemsets,lookaheads,solved c.y
