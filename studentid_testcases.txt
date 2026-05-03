@@ -1,4 +1,4 @@
-./bison --feature=bad
+sed -n 398,409p ../tests/sets.at >ad.y; ./bison --trace ad.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace ad.y
 ./bison --html ../examples/java/calc/Calc.y
 ./bison --xml ../src/parse-gram.y
