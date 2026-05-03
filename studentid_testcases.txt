@@ -21,7 +21,7 @@ sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.a
 sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always ../tests/input.at
-printf '%s\n' '%token A B' '%define lr.type ielr' '%expect 1' '%%' 's:e;' 'e:A|B|e e;' '%%' >z.y; ./bison --trace z.y
+./bison --report=error=itemsets
 ./bison ../tests/regression.at
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
