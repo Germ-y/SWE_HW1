@@ -21,7 +21,7 @@ sed -n 1941,1956p ../tests/conflicts.at >input.y; ./bison --trace=cex -fcaret --
 sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always ../tests/input.at
-./bison --xml ../examples/c++/calc++/parser.yy
+./bison --trace ../tests/m4.at
 ./bison ../tests/regression.at
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
