@@ -1,5 +1,5 @@
 ./bison --feature=bad
-./bison --report=all ../examples/c/glr/c++-types.y
+sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace ad.y
 ./bison --html ../examples/java/calc/Calc.y
 ./bison --xml ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -Wcounterexamples /dev/stdin
