@@ -22,7 +22,7 @@ sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always ../tests/input.at
 ./bison --report=error=itemsets
-printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison --report=all -Wcounterexamples g.y
+printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 320,338p ../tests/reduce.at >ad.y; ./bison --xml=ad.xml ad.y
