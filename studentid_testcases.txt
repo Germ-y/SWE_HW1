@@ -8,7 +8,7 @@ sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --trace=cex -fcaret --report=all ../examples/c/bistromathic/parse.y
 ./bison --update dep.y
 printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' | tee x.y | ./bison --report=all /dev/stdin
-printf '%s\n' '%glr-parser' '%locations' '%token <i> A B C' '%union {int i;}' '%type <i> e' '%destructor {free($$);} <i>' '%printer {fprintf(yyo,"%d",$$);} <i>' '%%' 's:e;' 'e:A|B|C|e e %dprec 1;' '%%' >cg.y; ./bison -Wcounterexamples cg.y
+sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
 ./bison --report=bad
 ./bison --report=all ../examples/java/calc/Calc.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -d -v /dev/stdin
