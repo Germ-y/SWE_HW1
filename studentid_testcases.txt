@@ -13,7 +13,7 @@ printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%
 ./bison --report=all ../examples/java/calc/Calc.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' >r.y
 ./bison -Wcounterexamples r.y
-printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y
+printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | ./bison -L java -d -v /dev/stdin
 ./bison --warnings=error=other d.y
 ./bison --graph ../examples/c/reccalc/parse.y
 ./bison --xml=x2.xml x.y
