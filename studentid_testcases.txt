@@ -15,7 +15,7 @@ printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%ri
 ./bison -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
 sed -n 543,559p ../tests/actions.at >input.y; ./bison -d -v input.y
 ./bison --graph ../examples/c++/glr/c++-types.yy
-printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' | tee old.y | ./bison --html=old.html /dev/stdin
+printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y; ./bison --language=java --report=all --graph=j.dot --xml=j.xml ../examples/java/simple/Calc.y
 sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Dlr.type=ielr input.y
 sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --update input.y
 sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
