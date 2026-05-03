@@ -25,6 +25,6 @@ sed -n 1374,1406p ../tests/c++.at >ad.y; ./bison --trace ad.y
 ./bison ../tests/regression.at
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-./bison -Dlr.type=ielr ../examples/java/calc/Calc.y
+sed -n 554,559p ../tests/counterexample.at >ad.y; ./bison --trace ad.y
 printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' | tee old.y | ./bison --html=old.html /dev/stdin
 ./bison -Werror=deprecated old.y
