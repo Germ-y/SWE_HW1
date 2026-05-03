@@ -18,7 +18,7 @@ printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | .
 ./bison -y ../examples/c++/variant-11.yy
 ./bison --report=all --xml=lg.xml c.y
 sed -n 1374,1406p ../tests/c++.at >ad.y; ./bison --trace ad.y
-./bison --trace ../tests/cxx-type.at
+sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always ../tests/input.at
 ./bison --xml ../examples/c++/calc++/parser.yy
