@@ -4,7 +4,7 @@
 ./bison --xml ../src/parse-gram.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -Wcounterexamples /dev/stdin
 printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' | tee dep.y | ./bison -f syntax-only /dev/stdin
-./bison --warnings=yacc dep.y
+./bison --warnings=bad
 ./bison -Dlr.type=lalr c.y
 ./bison --update dep.y
 printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' >x.y
