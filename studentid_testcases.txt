@@ -26,5 +26,5 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y
 ./bison nr.y
-./bison --version
+./bison --warnings=bad
 ./bison --report=all x.y
