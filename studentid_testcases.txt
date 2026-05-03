@@ -17,8 +17,8 @@ printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | .
 ./bison --graph ../examples/c++/glr/c++-types.yy
 ./bison --graph ../examples/c/reccalc/parse.y
 ./bison --xml=x2.xml x.y
-printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
-./bison --trace syn.y
+printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
+./bison -Wcounterexamples r.y
 ./bison ../tests/synclines.at
 ./bison --color=always ../tests/input.at
 ./bison --xml ../examples/c++/calc++/parser.yy
