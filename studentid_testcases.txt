@@ -1,6 +1,6 @@
 sed -n 291,301p ../tests/input.at >input.y; ./bison --trace input.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace ad.y
-./bison --html ../examples/java/calc/Calc.y
+./bison --feature=bad --report=bad --warnings=bad --color=bad
 sed -n 279,281p ../tests/conflicts.at >input.y; ./bison --trace=cex -fcaret --report=all input.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -d -v --report=all --graph=c.dot --xml=c.xml -Wcounterexamples /dev/stdin
 ./bison --trace ../lib/spawn.in.h
