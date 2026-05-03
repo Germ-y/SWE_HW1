@@ -11,7 +11,7 @@ printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%
 ./bison --graph=x.dot x.y
 ./bison --report=bad
 ./bison --report=all ../examples/java/calc/Calc.y
-printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' >r.y
+printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -d -v /dev/stdin
 ./bison -Wcounterexamples r.y
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | ./bison -L java -d -v /dev/stdin
 ./bison --graph ../examples/c++/glr/c++-types.yy
