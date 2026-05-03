@@ -26,5 +26,5 @@ printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 320,338p ../tests/reduce.at >ad.y; ./bison --xml=ad.xml ad.y
-./bison -Dapi.pure --trace old.y
+./bison -Dapi.pure --trace --report=all old.y
 ./bison ../tests/testsuite
