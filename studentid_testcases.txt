@@ -5,7 +5,7 @@ sed -n 279,281p ../tests/conflicts.at >input.y; ./bison --trace=cex -fcaret --re
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -d -v --report=all --graph=c.dot --xml=c.xml -Wcounterexamples /dev/stdin
 ./bison --trace ../lib/spawn.in.h
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
-./bison --trace c.y
+./bison --trace --xml=c2.xml c.y
 ./bison --feature=bad
 printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' | tee x.y | ./bison -d -v --report=all --graph=x.dot --xml=x.xml /dev/stdin
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
