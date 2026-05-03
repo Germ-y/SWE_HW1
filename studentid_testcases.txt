@@ -15,7 +15,7 @@ printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%ri
 ./bison -Wcounterexamples r.y
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y
 ./bison --warnings=error=other d.y
-./bison --graph ../examples/c/calc/calc.y
+./bison --graph ../examples/c/reccalc/parse.y
 printf '%s\n' '%debug' '%locations' '%define api.pure full' '%parse-param {int *r}' '%token A' '%%' 's:|s A {if(r)*r=0;};' '%%' >a.y
 printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 ./bison --trace syn.y
