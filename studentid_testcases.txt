@@ -2,29 +2,29 @@
 ./bison --report=all ../examples/c/glr/c++-types.y
 ./bison --html ../examples/java/calc/Calc.y
 ./bison ../src/parse-gram.y
-printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison --xml=x.xml -
-printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' | tee dep.y | ./bison --warnings=yacc -
+printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y
+printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y
 ./bison --warnings=yacc dep.y
 ./bison -Dlr.type=lalr c.y
 ./bison --report=itemsets,lookaheads,solved c.y
 ./bison -f syntax-only -M../..=. c.y
-printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' | tee g.y | ./bison --report=all -
-./bison --graph=x.dot ../examples/c++/glr/c++-types.yy
+printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y
+./bison --report=bad
 ./bison --report=all g.y
-printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -Wcounterexamples -
+printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' >r.y
 ./bison -Wcounterexamples r.y
-printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | ./bison --warnings=error=other -
+printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y
 ./bison --warnings=error=other d.y
 ./bison --graph ../examples/c/calc/calc.y
-./bison --report=bad
-printf '%s\n' '%%' 's: + + ;' '%%' | tee syn.y | ./bison --trace -
+printf '%s\n' '%debug' '%locations' '%define api.pure full' '%parse-param {int *r}' '%token A' '%%' 's:|s A {if(r)*r=0;};' '%%' >a.y
+printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 ./bison --trace syn.y
-./bison --report=all ../examples/java/calc/Calc.y
+./bison ../tests/synclines.at
 ./bison --color=always ../tests/input.at
-./bison --report=all ../examples/c/reccalc/parse.y
+./bison ../tests/diagnostics.at
 ./bison ../tests/regression.at
 ./bison --help
-sed -n 320,382p ../tests/named-refs.at | tee nr.y | ./bison nr.y
-./bison --xml=x.xml ../examples/c++/calc++/parser.yy
-./bison ../tests/java.at
-./bison --html ../src/parse-gram.y
+sed -n 320,382p ../tests/named-refs.at >nr.y
+./bison nr.y
+./bison --version
+./bison -L java -d -v a.y
