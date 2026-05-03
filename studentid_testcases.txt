@@ -24,7 +24,7 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
 ./bison --xml ../examples/c++/calc++/parser.yy
 ./bison ../tests/regression.at
 ./bison --help
-sed -n 320,382p ../tests/named-refs.at >nr.y
-./bison nr.y
+sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
+./bison ../tests/diagnostics.at
 printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' | tee old.y | ./bison --html=old.html /dev/stdin
 ./bison -Werror=deprecated old.y
