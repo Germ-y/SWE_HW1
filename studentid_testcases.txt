@@ -10,7 +10,7 @@ printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%'
 printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' >x.y
 ./bison --graph=x.dot x.y
 ./bison --report=bad
-./bison --report=all g.y
+./bison --report=all ../examples/java/calc/Calc.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' >r.y
 ./bison -Wcounterexamples r.y
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y
