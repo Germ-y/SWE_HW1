@@ -12,7 +12,7 @@ printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%
 ./bison --report=bad
 ./bison --report=all ../examples/java/calc/Calc.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison -d -v /dev/stdin
-sed -n 297,477p ../tests/c++.at >q.y; ./bison --report=all q.y
+./bison ../tests/java.at
 printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' | tee d.y | ./bison -L java -d -v /dev/stdin
 ./bison --graph ../examples/c++/glr/c++-types.yy
 ./bison --graph ../examples/c/reccalc/parse.y
