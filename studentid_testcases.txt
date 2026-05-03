@@ -26,5 +26,5 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y
 ./bison nr.y
-printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y
+printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' | tee old.y | ./bison --html=old.html /dev/stdin
 ./bison -Werror=deprecated old.y
