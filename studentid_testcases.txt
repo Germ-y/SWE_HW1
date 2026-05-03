@@ -27,4 +27,4 @@ printf '%s\n' '%%' 's: + + ;' '%%' >syn.y
 sed -n 320,382p ../tests/named-refs.at >nr.y
 ./bison nr.y
 ./bison --version
-./bison -L java -d -v a.y
+./bison --report=all x.y
