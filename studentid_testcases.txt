@@ -3,7 +3,7 @@ sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --gr
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --feature=bad --report=bad --warnings=bad --color=bad
-./bison --trace ../lib/spawn.in.h
+printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --trace=parse -fcaret -ffixit q.y
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --trace=tools --xml=c2.xml --graph=c2.dot --html=c2.html c.y
 ./bison --trace=grammar --language=c++ --report=all --graph=cc.dot --xml=cc.xml ../examples/c++/variant.yy
