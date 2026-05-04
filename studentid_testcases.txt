@@ -1,6 +1,6 @@
 printf '%s\n' '%token A' '%%' 's:A|%empty;' '%%' >q.y; ./bison -Wcex -fcaret -o - --defines=- --graph=- --xml=- q.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
-sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --update q.y
+sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --language=bad --feature=bad --report=bad --warnings=bad --color=bad
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --trace=parse -fcaret -ffixit q.y
@@ -21,7 +21,7 @@ sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.a
 sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always --trace=scan ../tests/input.at
-./bison --trace=none --trace=help
+./bison --trace=bitsets,ielr --trace=none --trace=help
 printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -Dlr.default-reduction=consistent --trace -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
