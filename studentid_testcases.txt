@@ -7,7 +7,7 @@ printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --trace=tools --xml=c2.xml --graph=c2.dot --html=c2.html c.y
 ./bison --language=c++ --report=all --graph=cc.dot --xml=cc.xml ../examples/c++/variant.yy
-printf '%s\n' '%define lr.type canonical-lr' '%expect 2' '%token A B C D E F' '%left A B C' '%%' 's:e;' 'e:A|B|C|D|E|F|e e|e A e|e B e|e C e;' '%%' | tee x.y | ./bison -Mold=new --trace -d -v -o x.c --report=all --report-file=x.out --graph=x.dot --xml=x.xml /dev/stdin
+sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -Wno-other -Sd.m4 q.y
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
 sed -n 2547,2549p ../tests/input.at >input.y; ./bison --report=all input.y
 printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
