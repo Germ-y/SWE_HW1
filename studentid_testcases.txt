@@ -25,6 +25,6 @@ sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison --trace -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-./bison -M=new --trace -d -v --report=all --graph=z.dot --xml=z.xml z.y
+sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new --trace --report=all q.y
 ./bison -Mold=new -Dapi.pure --trace --report=all old.y
 ./bison ../tests/testsuite
