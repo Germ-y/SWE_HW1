@@ -1,7 +1,7 @@
 sed -n 291,301p ../tests/input.at >input.y; ./bison --trace input.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 ./bison --feature=bad --report=bad --warnings=bad --color=bad
-printf '%s\n' '%union{int i;}' '%token <i> A' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A;' '%%' >z.y; ./bison --language=help
+printf '%s\n' '%union{int i;}' '%token <i> A B' '%type <i> s' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A|B;' '%%' >z.y; ./bison --language=help
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' | tee c.y | ./bison -d -v --report=all --graph=c.dot --xml=c.xml -Wcounterexamples /dev/stdin
 ./bison --trace ../lib/spawn.in.h
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
