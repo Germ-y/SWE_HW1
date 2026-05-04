@@ -2,14 +2,14 @@ perl -e 'print "%header \"\360\0\200\210\"\n\0\1\2\377?\n\"\\0\"\n%token \"x\" 1
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
-./bison -Dlr.type=ielr --report=all --trace=ielr ../src/h.y
+printf '%s\n' '%glr-parser' '%token A B' '%%' 's:e;' 'e:e e|e A e|B|%empty;' '%%' >h.y; ./bison -Dlr.type=ielr --report=all --trace=ielr h.y
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace ad.y
-./bison --trace=all -Wall ../src/zz.y
+printf '%s\n' '%union{int i;}' '%token <i> A B C' '%type <i> s' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A|B|C;' '%%' >zz.y; ./bison --trace=all -Wall zz.y
 ./bison --trace=ielr -Dlr.type=canonical-lr --report=all ../examples/c/reccalc/parse.y
 sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -o no/such/out.c --report-file=c.output --report=all --trace=parse -Wno-other -Sd.m4 q.y
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
-./bison -Dlr.type=ielr --report=all --trace=ielr ../src/b.y
+perl -e 'print "%token A\n%%\ns:".("|A"x128).";\n%%\n"' >b.y; ./bison -Dlr.type=ielr --report=all --trace=ielr b.y
 printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --report-file=b.output --report=all --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison --trace -d -v --report=all --graph=r.dot --xml=r.xml /dev/stdin
 ./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
