@@ -1,7 +1,7 @@
 perl -e 'print "%header \"\360\0\200\210\"\n\0\1\2\377?\n\"\\0\"\n%token \"x\" 1\n%type<t> \"y\"\n%%\n?\ns:\"x\" \"y\" \"z\";\n%&\n%-\n%{\n"' >q.y; ./bison -fcaret -Wdangling q.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
-printf '%s\n' '%define api.push-pull both' '%define api.pure full' '%locations' '%parse-param {int*p}' '%lex-param {int*p}' '%token A B' '%%' 's:A|error B|%empty;' '%%' >push.y; ./bison --trace=all -Wall --report=all --graph=x.dot --xml=x.xml push.y
+./bison -S ../data/skeletons/lalr1.cc --trace=scan --report=all ../examples/c++/calc++/parser.yy
 printf '%s\n' '%glr-parser' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:e e %dprec 1|e A e|e B e|C|%empty;' '%%' >v.y; ./bison -Dlr.type=ielr --report=all --trace=ielr v.y
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace ad.y
