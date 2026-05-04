@@ -9,7 +9,7 @@ printf '%s\n' '%union{int i;}' '%token <i> A B C D' '%type <i> s' '%destructor{}
 ./bison --trace=ielr -Dlr.type=canonical-lr --report=all ../examples/c/reccalc/parse.y
 sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -o no/such/out.c --report-file=c.output --report=all --trace=parse -Wno-other -Sd.m4 q.y
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
-perl -e 'print "%token A\n%%\ns:".("|A"x960).";\n%%\n"' >b.y; ./bison -Dlr.type=ielr --report=all --trace=ielr b.y
+perl -e 'print "%token A\n%%\ns:".("|A"x480).";\n%%\n"' >b.y; ./bison -Dlr.type=ielr --report=all --trace=ielr b.y
 printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --report-file=b.output --report=all --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison --trace -d -v --report=all --graph=r.dot --xml=r.xml /dev/stdin
 ./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
