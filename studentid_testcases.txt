@@ -1,4 +1,4 @@
-printf '%s\n' '%token A' '%%' 's:A|%empty;' '%%' >q.y; ./bison -Wcex -fcaret -o - --defines=- --graph=- --xml=- q.y
+perl -e 'print "%header \"\360\0\200\210\"\n\0\1\2\377?\n\"\\0\"\n%%\n?\ndefault: q(a) }\n%&\n%bad\n%-\n%{\n"' >q.y; ./bison -fcaret q.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
