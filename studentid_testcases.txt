@@ -1,7 +1,7 @@
 sed -n 291,301p ../tests/input.at >input.y; ./bison --trace input.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --update q.y
-sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison -Dlr.type=canonical-lr --report=all z.y
+sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --feature=bad --report=bad --warnings=bad --color=bad
 ./bison --trace ../lib/spawn.in.h
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
@@ -25,6 +25,6 @@ sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison --trace -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new --trace --report=all q.y
+sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Werror --trace --report=all q.y
 ./bison -Mold=new -Dapi.pure --trace --report=all old.y
 ./bison ../tests/testsuite
