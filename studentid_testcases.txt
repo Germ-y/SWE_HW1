@@ -2,7 +2,7 @@ perl -e 'print "%header \"\360\0\200\210\"\n\0\1\2\377?\n\"\\0\"\n%token \"x\" 1
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
-printf '%s\n' '%glr-parser' '%token A B' '%%' 's:e;' 'e:e e|e A e|B|%empty;' '%%' >h.y; ./bison -Dlr.type=ielr --report=all --trace=ielr h.y
+printf '%s\n' '%glr-parser' '%token A B C' '%left A' '%%' 's:e;' 'e:e e|e A e|e B e|C|%empty;' '%%' >h.y; ./bison -Dlr.type=ielr --report=all --trace=ielr h.y
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace ad.y
 printf '%s\n' '%union{int i;}' '%token <i> A B C' '%type <i> s' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A|B|C;' '%%' >zz.y; ./bison --trace=all -Wall zz.y
