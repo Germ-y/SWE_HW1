@@ -27,4 +27,4 @@ printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Werror --trace --report=all q.y
 ./bison -Mold=new -Dapi.pure --trace --report=all old.y
-./bison ../tests/testsuite
+./bison -fcaret -ffixit ../tests/testsuite
