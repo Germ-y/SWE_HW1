@@ -2,7 +2,7 @@ sed -n 291,301p ../tests/input.at >input.y; ./bison --trace input.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
-printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --feature=bad --report=bad --warnings=bad --color=bad
+printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --language=bad --feature=bad --report=bad --warnings=bad --color=bad
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --trace=parse -fcaret -ffixit q.y
 sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --trace=tools --xml=c2.xml --graph=c2.dot --html=c2.html c.y
@@ -20,11 +20,11 @@ sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Mold=new --trace --re
 sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --update input.y
 sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
-./bison --color=always ../tests/input.at
-./bison --trace=help
+./bison --color=always --trace=scan ../tests/input.at
+./bison --trace=none --trace=help
 printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison --trace -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Werror --trace --report=all q.y
 ./bison -Mold=new -Dapi.pure --trace --report=all old.y
-./bison -fcaret -ffixit ../tests/testsuite
+./bison --trace=scan -fcaret -ffixit ../tests/testsuite
