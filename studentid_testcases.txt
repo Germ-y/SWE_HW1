@@ -10,11 +10,11 @@ sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
 sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison --trace=parse -Wno-other -Sd.m4 q.y
 sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
 sed -n 2547,2549p ../tests/input.at >input.y; ./bison --report=all input.y
-printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
+printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --report-file=b.output --report=all --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison --trace -d -v --report=all --graph=r.dot --xml=r.xml /dev/stdin
-./bison -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
-sed -n 543,559p ../tests/actions.at >input.y; ./bison --report=all --html=x.html -d -v input.y
-./bison --graph ../examples/c++/glr/c++-types.yy
+./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
+sed -n 543,559p ../tests/actions.at >input.y; ./bison --report-file=b.output --report=all --report=all --html=x.html -d -v input.y
+./bison -Wcex -fcaret --graph ../examples/c++/glr/c++-types.yy
 printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y; ./bison --language=java --report=all --graph=j.dot --xml=j.xml ../examples/java/simple/Calc.y
 sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Mold=new --trace --report=all --graph=i19.dot --xml=i19.xml -Dlr.type=ielr input.y
 sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --trace=parse --update input.y
@@ -25,6 +25,6 @@ sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -Dlr.default-reduction=consistent --trace -d -v --report=all --graph=g.dot --xml=g.xml -Wcounterexamples g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Werror --trace --report=all q.y
+sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Mold=new -Werror --trace --report=all q.y
 ./bison -Wall -Mold=new -Dapi.pure --trace --report=all old.y
 ./bison --trace=scan -fcaret -ffixit ../tests/testsuite
