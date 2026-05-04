@@ -1,4 +1,4 @@
-sed -n 291,301p ../tests/input.at >input.y; ./bison --trace input.y
+printf '%s\n' '%token A' '%%' 's:A|%empty;' '%%' >q.y; ./bison -o - --defines=- --graph=- --xml=- q.y
 sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=all --graph=c1.dot --xml=c1.xml ad.y
 sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --update q.y
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
