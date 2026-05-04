@@ -4,7 +4,7 @@ sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --tra
 sed -n 301,312p ../tests/counterexample.at|sed '1s/^..//;$s/]])$//' >z.y; ./bison --trace=scan -Dlr.type=canonical-lr -Wcounterexamples --report=all z.y
 printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison --language=bad --feature=bad --report=bad --warnings=bad --color=bad
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
-sed -n 1647,1662p ../tests/input.at >ad.y; ./bison --trace ad.y
+sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace ad.y
 ./bison --trace=tools -d -v --xml=c2.xml --graph=c2.dot --html=c2.html c.y
 ./bison --trace=ielr -Dlr.type=canonical-lr --report=all ../examples/c/reccalc/parse.y
 sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -o no/such/out.c --report-file=c.output --report=all --trace=parse -Wno-other -Sd.m4 q.y
@@ -14,7 +14,7 @@ printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison
 printf '%s\n' '%define lr.type ielr' '%expect 1' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:A|B|C|D|e e|e A e|e B e;' '%%' | tee r.y | ./bison --trace -d -v --report=all --graph=r.dot --xml=r.xml /dev/stdin
 ./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror ../src/parse-gram.y
 sed -n 543,559p ../tests/actions.at >input.y; ./bison --report-file=b.output --report=all --report=all --html=x.html -d -v input.y
-./bison -Wcex -fcaret --graph ../examples/c++/glr/c++-types.yy
+./bison --defines=no/such/out.h -Wcex -fcaret --graph ../examples/c++/glr/c++-types.yy
 printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y; ./bison --language=java --report=all --graph=j.dot --xml=j.xml ../examples/java/simple/Calc.y
 sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Mold=new --trace --report=all --graph=i19.dot --xml=i19.xml -Dlr.type=ielr input.y
 sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --trace=parse --update input.y
