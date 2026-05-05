@@ -22,7 +22,7 @@ sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
 sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
 ./bison --color=always --trace=scan ../tests/input.at
 ./bison --trace=bitsets,ielr --trace=none --trace=help
-printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -Dlr.default-reduction=consistent --trace -d -v --report=state,lookahead,itemset,solved --graph=g.dot --xml=g.xml -Wcounterexamples -Werror=counterexamples g.y
+printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -Dlr.default-reduction=consistent --trace -d -v --report=state,lookahead,itemset,solved --graph=g.dot --xml=g.xml -Wcounterexamples -Werror=counterexamples -k -y g.y
 ./bison --help
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
 sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Mold=new -Werror --trace --report=all q.y
