@@ -4,7 +4,7 @@ sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --tra
 ./bison -S ../data/skeletons/lalr1.cc -Dapi.token.constructor --trace=scan --report=all -k -y ../examples/c++/calc++/parser.yy
 printf '%s\n' '%glr-parser' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:e e %dprec 1|e A e|e B e|C|%empty;' '%%' >v.y; ./bison -Dlr.type=ielr --report=all --trace=ielr v.y
 printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
-sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace ad.y
+sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace -Wnone ad.y
 printf '%s\n' '%union{int i;}' '%token <i> A B C D' '%type <i> s' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A|B|C|D|%empty;' '%%' >v.y; ./bison --trace=all -Wall --report=all --html=l8.html -Wcex -Dlr.type=canonical-lr v.y
 ./bison --trace=ielr -Dlr.type=canonical-lr --report=all ../examples/c/reccalc/parse.y
 sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -o no/such/out.c --report-file=c.output --report=all --trace=parse -Wno-other -Sd.m4 q.y
