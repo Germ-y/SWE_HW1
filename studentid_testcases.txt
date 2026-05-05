@@ -14,7 +14,7 @@ printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison
 ./bison -o /dev/null --defines=/dev/null --report=all --graph=/dev/null --xml=/dev/null -k -y ../examples/c/bistromathic/parse.y
 ./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror -k -y ../src/parse-gram.y
 sed -n 543,559p ../tests/actions.at >input.y; ./bison --report-file=b.output --report=all --report=all --html=x.html -d -v input.y
-./bison --defines=no/such/out.h -Wcex -fcaret --graph ../examples/c++/glr/c++-types.yy
+./bison --defines=no/such/out.h -Wcex -fcaret --graph --html=glr17.html ../examples/c++/glr/c++-types.yy
 printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y; ./bison --language=java --report=all --graph=j.dot --xml=j.xml ../examples/java/simple/Calc.y
 sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Mold=new --trace --report=all --graph=i19.dot --xml=i19.xml -Dlr.type=ielr input.y
 sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --trace=parse --update input.y
