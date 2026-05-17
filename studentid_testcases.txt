@@ -1,30 +1,30 @@
+perl -e 'print "%header \"\360\0\200\210\"\n\0\1\2\377?\n\"\\0\"\n%token \"x\" 1\n%type<t> \"y\"\n%%\n?\ns:\"x\" \"y\" \"z\";\n%&\n%-\n%{\n"' >q.y; ./bison -fcaret -Wdangling q.y
+sed -n 1381,1385p ../tests/conflicts.at >ad.y; ./bison --trace --report=state,lookahead,itemset,solved --graph=c1.dot --xml=c1.xml ad.y
+sed -n 1870,1875p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison --trace=all --update q.y
+sed -n 1057,1080p ../tests/conflicts.at|sed '1s/^..//;$s/]])$//;$s/])$//' >z.y; ./bison -Dlr.type=ielr --trace=ielr --report=all --graph=ta.dot --xml=ta.xml z.y
+printf '%s\n' '%glr-parser' '%token A B C D' '%left A' '%right B' '%%' 's:e;' 'e:e e %dprec 1|e A e|e B e|C|%empty;' '%%' >v.y; ./bison -Dlr.type=ielr --report=all --trace=ielr v.y
+printf '%s\n' '%{' 'char*s="x";/*c*/' '%}' '%token <t> A "a\\n" _("b")' '%%' 's[x]: %?{1} A { $$=$1; };' '%%' '//epi' >q.y; ./bison --defines=no/such/out.h --trace=parse -fcaret -ffixit q.y
+sed -n 1647,1662p ../tests/input.at >ad.y; ./bison -o no/such/out.c --trace -Wnone ad.y
+printf '%s\n' '%union{int i;}' '%token <i> A B C D' '%type <i> s' '%destructor{} <i>' '%printer{} <i>' '%%' 's:A|B|C|D|%empty;' '%%' >v.y; ./bison --trace=all -Wall --report=all --html=l8.html -Wcex -Dlr.type=canonical-lr v.y
+./bison --trace=ielr -Dlr.type=canonical-lr --report=all ../examples/c/reccalc/parse.y
+sed -n 430,445p ../tests/input.at|sed '1s/^..//;$s/]])$//' >d.m4;sed -n 448,465p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y;./bison -o no/such/out.c --report-file=c.output --report=all --trace=parse -Wno-other -Sd.m4 q.y
+sed -n 1994,1997p ../tests/input.at >special-char-@@.y; ./bison -d -v special-char-@@.y
+perl -e 'print "%token A\n%%\ns:".("|A"x660).";\n%%\n"' >b.y; ./bison -Dlr.type=ielr --report=all --trace=ielr --graph=b12.dot --xml=b12.xml b.y
+printf '%s\n' '%locations' '%token A B' '%%' 's:A|error;u:B;' '%%' >u.y; ./bison --report-file=b.output --report=all --trace -d -v --report=all --graph=u.dot --xml=u.xml -Dlr.keep-unreachable-state u.y
+sed -n 1418,1430p ../tests/conflicts.at|sed '1s/^..//;$s/]])$//;$s/])$//' >z.y; ./bison -o /dev/null --defines=/dev/null --report=all --graph=/dev/null --xml=/dev/null z.y
+./bison --report=all --graph=b.dot --xml=b.xml -Dlr.type=canonical-lr --report=all --graph=pg.dot -Werror -k -y -Wnone ../src/parse-gram.y
+sed -n 543,559p ../tests/actions.at >input.y; ./bison --report-file=b.output --report=all --report=all --html=x.html -d -v input.y
+./bison --defines=no/such/out.h -Wcex -fcaret --graph --html=glr17.html ../examples/c++/glr/c++-types.yy
+printf '%s\n' '%default_prec' '%error_verbose' '%expect_rr 0' '%file-prefix = "p"' '%fixed-output_files' '%name-prefix= "foo"' '%no_lines' '%token_table' '%pure_parser' '%%' 's:;' '%%' >old.y; ./bison --language=java --report=all --graph=j.dot --xml=j.xml ../examples/java/simple/Calc.y
+sed -n 1603,1635p ../tests/conflicts.at >input.y; ./bison -Mold=new --trace --report=all --graph=i19.dot --xml=i19.xml -Dlr.type=ielr input.y
+sed -n 2893,2924p ../tests/input.at >input.y; sed -n 2953,2975p ../tests/input.at >input.y; ./bison --trace=parse --update input.y
+sed -n 2893,2924p ../tests/input.at >ad.y; ./bison -Werror ad.y
+sed -n 2347,2353p ../tests/input.at >ad.y; ./bison --trace ad.y
+./bison --color=always --trace=scan ../tests/input.at
+./bison --trace=bitsets,ielr --trace=none --trace=help
+printf '%s\n' '%glr-parser' '%expect-rr 1' '%token A' '%%' 's:s s|A|%empty;' '%%' >g.y; ./bison -Dlr.default-reduction=consistent --trace -d -v --report=state,lookahead,itemset,solved --graph=g.dot --xml=g.xml -Wcounterexamples -Werror=counterexamples -k -y g.y
 ./bison --help
-./bison ../tests/named-refs.at
-./bison ../tests/diagnostics.at
-printf '%s\n' '%union {int i;}' '%token <i> A' '%type <i> s' '%%' 's:A {$$=$1;}|s A {$$=$1;};' '%%' >s.y; ./bison -f syntax-only s.y
-printf '%s\n' '%define lr.type ielr' '%token A B C' '%%' 's:a|b;a:A B|A C;b:A B|A C;' '%%' >c.y; ./bison -f syntax-only c.y
-printf '%s\n' '%token A B' '%%' 's:s s|A|B;' '%%' >if.y; ./bison -f syntax-only -Wcounterexamples if.y
-printf '%s\n' '%glr-parser' '%token WORD' '%%' 's:w;w:WORD|w WORD|w w;' '%%' >g.y; ./bison -f syntax-only g.y
-printf '%s\n' '%pure-parser' '%error-verbose' '%name-prefix "o"' '%token A' '%%' 's:A;' '%%' >dep.y; ./bison -f syntax-only --warnings=all,error=deprecated dep.y
-./bison --color=always ../tests/input.at
-printf '%s\n' '%token A' '%token A' '%type <i> z' '%%' 's:A;' '%%' >d.y; ./bison --warnings=error=other d.y
-printf '%s\n' '%{' 'int x;' >u.y; ./bison u.y
-./bison ../tests/types.at
 sed -n 320,382p ../tests/named-refs.at >nr.y; ./bison nr.y
-printf '%s\n' '%%' 's: + + ;' '%%' >syn.y; ./bison --trace syn.y
-./bison -Dlr.type=ielr c.y
-./bison -Dlr.type=lalr c.y
-./bison ../tests/conflicts.at
-./bison --report=all c.y
-./bison -Wcounterexamples if.y
-./bison -L java -d -v s.y
-./bison ../tests/regression.at
-./bison --skeleton=missing s.y
-./bison -f syntax-only -M../..=. c.y
-./bison ../tests/java.at
-./bison --report=all g.y
-./bison --html=s.html s.y
-./bison --graph=g.dot g.y
-./bison --xml=g.xml g.y
-./bison --warnings=yacc dep.y
-./bison --feature=bad s.y
+sed -n 2280,2283p ../tests/input.at|sed '1s/^..//;$s/]])$//' >q.y; ./bison -Mold=new -Mold=new -Werror --trace --report=all q.y
+./bison --color=always -Wall -Mold=new -Dapi.pure --trace --report=state,lookahead,itemset,solved old.y
+./bison --trace=scan -fcaret -ffixit ../tests/testsuite
